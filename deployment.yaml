@@ -1,23 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
+
 metadata:
   name: myajay-app-deployment
+
 spec:
-  replicas: 3
+  replicas: 1
+
   selector:
     matchLabels:
       app: myajay-app
+
   template:
     metadata:
       labels:
         app: myajay-app
+
     spec:
       containers:
-      - name: myajay-app
-        image: 043391333186.dkr.ecr.ca-central-1.amazonaws.com/myajay-app:1.0
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        ports:
-        - containerPort: 80
+        - name: myajay-app
+          image: 043391333186.dkr.ecr.ca-central-1.amazonaws.com/myajay-app:1.0
+
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+
+          ports:
+            - containerPort: 80
